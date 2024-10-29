@@ -1,0 +1,4 @@
+source;share/pfr_urdf_ws/local_setup.bash
+source;share/pfr_urdf_ws/local_setup.dsv
+source;share/pfr_urdf_ws/local_setup.sh
+source;share/pfr_urdf_ws/local_setup.zsh

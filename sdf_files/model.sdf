@@ -1,0 +1,622 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+    <world name="pfr_world">
+        <physics name="1ms" type="ignored">
+            <max_step_size>0.001</max_step_size>
+            <real_time_factor>1.0</real_time_factor>
+        </physics>
+        <plugin
+            filename="gz-sim-physics-system"
+            name="gz::sim::systems::Physics">
+        </plugin>
+        <plugin
+            filename="gz-sim-user-commands-system"
+            name="gz::sim::systems::UserCommands">
+        </plugin>
+        <plugin
+            filename="gz-sim-scene-broadcaster-system"
+            name="gz::sim::systems::SceneBroadcaster">
+        </plugin>
+
+        <light type="directional" name="sun">
+            <cast_shadows>true</cast_shadows>
+            <pose>0 0 10 0 0 0</pose>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>0.2 0.2 0.2 1</specular>
+            <attenuation>
+                <range>1000</range>
+                <constant>0.9</constant>
+                <linear>0.01</linear>
+                <quadratic>0.001</quadratic>
+            </attenuation>
+            <direction>-0.5 0.1 -0.9</direction>
+        </light>
+
+        <model name="ground_plane">
+            <static>true</static>
+            <link name="link">
+                <collision name="collision">
+                <geometry>
+                    <plane>
+                    <normal>0 0 1</normal>
+                    </plane>
+                </geometry>
+                </collision>
+                <visual name="visual">
+                <geometry>
+                    <plane>
+                    <normal>0 0 1</normal>
+                    <size>100 100</size>
+                    </plane>
+                </geometry>
+                <material>
+                    <ambient>0.8 0.8 0.8 1</ambient>
+                    <diffuse>0.8 0.8 0.8 1</diffuse>
+                    <specular>0.8 0.8 0.8 1</specular>
+                </material>
+                </visual>
+            </link>
+        </model>
+
+<!--Create the Robot geometry and links -->
+        <model name='pfr_robot' canonical_link='chassis'>
+            <pose relative_to='world'>0 0 0 0 0 0</pose>   <!--the pose is relative to the world by default-->
+
+            <link name='chassis'>
+                <pose relative_to='__model__'>0 0 1.03 0 0 0</pose>
+                <inertial> <!--inertial properties of the link mass, inertia matix-->
+                    <mass>31.726</mass>
+                    <inertia>
+                        <ixx>14.69967178219</ixx>
+                        <ixy>9.034e-14</ixy>
+                        <ixz>1.250e-13</ixz>
+                        <iyy>18.23</iyy>
+                        <iyz>3.749e-12</iyz>
+                        <izz>31.10</izz>
+                    </inertia>                    
+                </inertial>
+                <visual name='visual'>
+                    <geometry>
+                        <mesh>
+                            <uri>meshes/frame_assembly.stl</uri>
+                        </mesh>
+                    </geometry>
+                    <!--let's add color to our link-->
+                    <material>
+                        <ambient>0.2 0.2 0.2 1</ambient>
+                        <diffuse>0.6 0.6 0.6 1</diffuse>
+                        <specular>0.9 0.9 0.9 1</specular>
+                        <emissive>0.0 0.0 0.0 1</emissive>
+                    </material>
+                </visual>
+                <collision name='collision'> <!--todo: describe why we need the collision-->
+                    <geometry>
+                        <mesh>
+                            <uri>meshes/frame_assembly.stl</uri>
+                        </mesh>
+                    </geometry>
+                </collision>
+            </link>
+
+<!--Build left fork-->
+            <link name='right_fork'>
+                <pose relative_to="chassis">0.75 -0.78 -0.42 0 0 1.571</pose> <!--angles are in radian-->
+                <inertial>
+                    <mass>20.664</mass>
+                    <inertia>
+                        <ixx>0.748741229</ixx>
+                        <ixy>0.017262554</ixy>
+                        <ixz>-0.011181714</ixz>
+                        <iyy>0.577270351</iyy>
+                        <iyz>0.044985592</iyz>
+                        <izz>0.577720988</izz>
+                    </inertia>
+                    <pose>-0.007627 0.031911 0.108898 0 0 0</pose> <!-- Assuming no rotation, adjust if necessary -->
+                </inertial>
+                <visual name='visual'>
+                    <geometry>
+                        <mesh>
+                            <uri>meshes/fork_assembly.stl</uri>
+                        </mesh>
+                    </geometry>
+                    <material>
+                        <ambient>0.0 0.3 0.0 1.0</ambient> <!-- Darker green -->
+                        <diffuse>0.0 0.5 0.0 1.0</diffuse> <!-- Medium green -->
+                        <specular>0.2 0.2 0.2 1.0</specular> <!-- Darker gray, for metallic sheen -->
+                    </material>
+                </visual>
+                <collision name='collision'>
+                    <geometry>
+                        <mesh>
+                            <uri>meshes/fork_assembly.stl</uri>
+                        </mesh>
+                    </geometry>
+                </collision>
+            </link>
+
+<!--Build Right fork-->
+            <link name='right_back_fork'>
+                <pose relative_to="chassis">-0.75 -0.78 -0.42 0 0 1.571</pose> <!--angles are in radian-->
+                <inertial>
+                    <mass>20.664</mass>
+                    <inertia>
+                        <ixx>0.748741229</ixx>
+                        <ixy>0.017262554</ixy>
+                        <ixz>-0.011181714</ixz>
+                        <iyy>0.577270351</iyy>
+                        <iyz>0.044985592</iyz>
+                        <izz>0.577720988</izz>
+                    </inertia>
+                    <pose>-0.007627 0.031911 0.108898 0 0 0</pose> <!-- Assuming no rotation, adjust if necessary -->
+                </inertial>
+                <visual name='visual'>
+                    <geometry>
+                        <mesh>
+                            <uri>meshes/fork_assembly.stl</uri>
+                        </mesh>
+                    </geometry>
+                    <material>
+                        <ambient>0.0 0.3 0.0 1.0</ambient> <!-- Darker green -->
+                        <diffuse>0.0 0.5 0.0 1.0</diffuse> <!-- Medium green -->
+                        <specular>0.2 0.2 0.2 1.0</specular> <!-- Darker gray, for metallic sheen -->
+                    </material>
+                </visual>
+                <collision name='collision'>
+                    <geometry>
+                        <mesh>
+                            <uri>meshes/fork_assembly.stl</uri>
+                        </mesh>
+                    </geometry>
+                </collision>
+            </link>
+
+<!--Build left back fork-->
+            <link name='left_fork'>
+                <pose relative_to="chassis">0.75 0.78 -0.42 0 0 1.571</pose> <!--angles are in radian-->
+                <inertial>
+                    <mass>20.664</mass>
+                    <inertia>
+                        <ixx>0.748741229</ixx>
+                        <ixy>0.017262554</ixy>
+                        <ixz>-0.011181714</ixz>
+                        <iyy>0.577270351</iyy>
+                        <iyz>0.044985592</iyz>
+                        <izz>0.577720988</izz>
+                    </inertia>
+                    <pose>-0.007627 0.031911 0.108898 0 0 0</pose> <!-- Assuming no rotation, adjust if necessary -->
+                </inertial>
+                <visual name='visual'>
+                    <geometry>
+                        <mesh>
+                            <uri>meshes/fork_assembly.stl</uri>
+                        </mesh>
+                    </geometry>
+                    <material>
+                        <ambient>0.0 0.3 0.0 1.0</ambient> <!-- Darker green -->
+                        <diffuse>0.0 0.5 0.0 1.0</diffuse> <!-- Medium green -->
+                        <specular>0.2 0.2 0.2 1.0</specular> <!-- Darker gray, for metallic sheen -->
+                    </material>
+                </visual>
+                <collision name='collision'>
+                    <geometry>
+                        <mesh>
+                            <uri>meshes/fork_assembly.stl</uri>
+                        </mesh>
+                    </geometry>
+                </collision>
+            </link>
+
+<!--Build Right back fork-->
+            <link name='left_back_fork'>
+                <pose relative_to="chassis">-0.75 0.78 -0.42 0 0 1.571</pose> <!--angles are in radian-->
+                <inertial>
+                    <mass>20.664</mass>
+                    <inertia>
+                        <ixx>0.748741229</ixx>
+                        <ixy>0.017262554</ixy>
+                        <ixz>-0.011181714</ixz>
+                        <iyy>0.577270351</iyy>
+                        <iyz>0.044985592</iyz>
+                        <izz>0.577720988</izz>
+                    </inertia>
+                    <pose>-0.007627 0.031911 0.108898 0 0 0</pose> <!-- Assuming no rotation, adjust if necessary -->
+                </inertial>
+                <visual name='visual'>
+                    <geometry>
+                        <mesh>
+                            <uri>meshes/fork_assembly.stl</uri>
+                        </mesh>
+                    </geometry>
+                    <material>
+                        <ambient>0.0 0.3 0.0 1.0</ambient> <!-- Darker green -->
+                        <diffuse>0.0 0.5 0.0 1.0</diffuse> <!-- Medium green -->
+                        <specular>0.2 0.2 0.2 1.0</specular> <!-- Darker gray, for metallic sheen -->
+                    </material>
+                </visual>
+                <collision name='collision'>
+                    <geometry>
+                        <mesh>
+                            <uri>meshes/fork_assembly.stl</uri>
+                        </mesh>
+                    </geometry>
+                </collision>
+            </link>
+
+
+<!--Build left wheel-->
+            <link name='left_wheel'>
+                <pose relative_to="left_fork">0 0 -0.31 0 1.571 0</pose> <!--angles are in radian-->
+                <inertial>
+                    <mass>18.825</mass>
+                    <inertia>
+                        <ixx>0.51318866</ixx>
+                        <ixy>-6.46e-7</ixy>
+                        <ixz>-3.08e-7</ixz>
+                        <iyy>0.513187519</iyy>
+                        <iyz>-8.3026e-5</iyz>
+                        <izz>0.98574484</izz>
+                    </inertia>
+                    <pose>2.533e-7 0.000068 0.004491 0 0 0</pose>
+                </inertial>
+                <visual name='visual'>
+                    <geometry>
+                        <mesh>
+                            <uri>meshes/wheel_assembly.stl</uri>
+                        </mesh>
+                    </geometry>
+                    <material>
+                        <ambient>0.1 0.1 0.1 1.0</ambient> <!-- Dark gray for rubber -->
+                        <diffuse>0.2 0.2 0.2 1.0</diffuse> <!-- Slightly lighter gray -->
+                        <specular>0.0 0.0 0.0 1.0</specular> <!-- No specular reflection, matte finish -->
+                    </material>
+                </visual>
+                <collision name='collision'>
+                    <geometry>
+                        <mesh>
+                            <uri>meshes/wheel_assembly.stl</uri>
+                        </mesh>
+                    </geometry>
+                    <surface>
+                        <friction>
+                            <ode>
+                                <mu>100</mu> <!-- High friction value -->
+                                <mu2>100</mu2>
+                            </ode>
+                        </friction>
+                    </surface>
+                </collision>
+            </link>
+
+<!--Build right wheel-->
+            <link name='right_wheel'>
+                <pose relative_to="right_fork">0 0 -0.31 0 1.571 0</pose> <!--angles are in radian-->
+                <inertial>
+                    <mass>18.825</mass>
+                    <inertia>
+                        <ixx>0.51318866</ixx>
+                        <ixy>-6.46e-7</ixy>
+                        <ixz>-3.08e-7</ixz>
+                        <iyy>0.513187519</iyy>
+                        <iyz>-8.3026e-5</iyz>
+                        <izz>0.98574484</izz>
+                    </inertia>
+                    <pose>2.533e-7 0.000068 0.004491 0 0 0</pose>
+                </inertial>
+                <visual name='visual'>
+                    <geometry>
+                        <mesh>
+                            <uri>meshes/wheel_assembly.stl</uri>
+                        </mesh>
+                    </geometry>
+                    <material>
+                        <ambient>0.1 0.1 0.1 1.0</ambient> <!-- Dark gray for rubber -->
+                        <diffuse>0.2 0.2 0.2 1.0</diffuse> <!-- Slightly lighter gray -->
+                        <specular>0.0 0.0 0.0 1.0</specular> <!-- No specular reflection, matte finish -->
+                    </material>
+                </visual>
+                <collision name='collision'>
+                    <geometry>
+                        <mesh>
+                            <uri>meshes/wheel_assembly.stl</uri>
+                        </mesh>
+                    </geometry>
+                    <surface>
+                        <friction>
+                            <ode>
+                                <mu>100</mu> <!-- High friction value -->
+                                <mu2>100</mu2>
+                            </ode>
+                        </friction>
+                    </surface>
+                </collision>
+            </link>
+
+
+<!--Build left back wheel-->
+            <link name='left_back_wheel'>
+                <pose relative_to="left_back_fork">0 0 -0.31 0 1.571 0</pose> <!--angles are in radian-->
+                <inertial>
+                    <mass>18.825</mass>
+                    <inertia>
+                        <ixx>0.51318866</ixx>
+                        <ixy>-6.46e-7</ixy>
+                        <ixz>-3.08e-7</ixz>
+                        <iyy>0.513187519</iyy>
+                        <iyz>-8.3026e-5</iyz>
+                        <izz>0.98574484</izz>
+                    </inertia>
+                    <pose>2.533e-7 0.000068 0.004491 0 0 0</pose>
+                </inertial>
+                <visual name='visual'>
+                    <geometry>
+                        <mesh>
+                            <uri>meshes/wheel_assembly.stl</uri>
+                        </mesh>
+                    </geometry>
+                    <material>
+                        <ambient>0.1 0.1 0.1 1.0</ambient> <!-- Dark gray for rubber -->
+                        <diffuse>0.2 0.2 0.2 1.0</diffuse> <!-- Slightly lighter gray -->
+                        <specular>0.0 0.0 0.0 1.0</specular> <!-- No specular reflection, matte finish -->
+                    </material>
+                </visual>
+                <collision name='collision'>
+                    <geometry>
+                        <mesh>
+                            <uri>meshes/wheel_assembly.stl</uri>
+                        </mesh>
+                    </geometry>
+                    <surface>
+                        <friction>
+                            <ode>
+                                <mu>100</mu> <!-- High friction value -->
+                                <mu2>100</mu2>
+                            </ode>
+                        </friction>
+                    </surface>
+                </collision>
+            </link>
+
+<!--Build right back wheel-->
+            <link name='right_back_wheel'>
+                <pose relative_to="right_back_fork">0 0 -0.31 0 1.571 0</pose> <!--angles are in radian-->
+                <inertial>
+                    <mass>18.825</mass>
+                    <inertia>
+                        <ixx>0.51318866</ixx>
+                        <ixy>-6.46e-7</ixy>
+                        <ixz>-3.08e-7</ixz>
+                        <iyy>0.513187519</iyy>
+                        <iyz>-8.3026e-5</iyz>
+                        <izz>0.98574484</izz>
+                    </inertia>
+                    <pose>2.533e-7 0.000068 0.004491 0 0 0</pose>
+                </inertial>
+                <visual name='visual'>
+                    <geometry>
+                        <mesh>
+                            <uri>meshes/wheel_assembly.stl</uri>
+                        </mesh>
+                    </geometry>
+                    <material>
+                        <ambient>0.1 0.1 0.1 1.0</ambient> <!-- Dark gray for rubber -->
+                        <diffuse>0.2 0.2 0.2 1.0</diffuse> <!-- Slightly lighter gray -->
+                        <specular>0.0 0.0 0.0 1.0</specular> <!-- No specular reflection, matte finish -->
+                    </material>
+                </visual>
+                <collision name='collision'>
+                    <geometry>
+                        <mesh>
+                            <uri>meshes/wheel_assembly.stl</uri>
+                        </mesh>
+                    </geometry>
+                    <surface>
+                        <friction>
+                            <ode>
+                                <mu>100</mu> <!-- High friction value -->
+                                <mu2>100</mu2>
+                            </ode>
+                        </friction>
+                    </surface>
+                </collision>
+            </link>
+
+
+<!--Joints-->
+
+            <joint name='left_fork_joint' type='fixed'> <!--continous joint is not supported yet-->
+                <pose relative_to='left_fork'/>
+                <parent>chassis</parent>
+                <child>left_fork</child>
+                <axis>
+                    <xyz expressed_in='__model__'>0 1 0</xyz> <!--can be defined as any frame or even arbitrary frames-->
+                    <limit>
+                        <lower>-1.79769e+308</lower>    <!--negative infinity-->
+                        <upper>1.79769e+308</upper>     <!--positive infinity-->
+                    </limit>
+                </axis>
+            </joint>
+
+            <joint name='right_fork_joint' type='fixed'>
+                <pose relative_to='right_fork'/>
+                <parent>chassis</parent>
+                <child>right_fork</child>
+                <axis>
+                    <xyz expressed_in='__model__'>0 1 0</xyz>
+                    <limit>
+                        <lower>-1.79769e+308</lower>    <!--negative infinity-->
+                        <upper>1.79769e+308</upper>     <!--positive infinity-->
+                    </limit>
+                </axis>
+            </joint>
+
+            <joint name='left_wheel_joint' type='revolute'> 
+                <pose relative_to='left_wheel'/>
+                <parent>left_fork</parent>
+                <child>left_wheel</child>                            
+                <axis>
+                    <xyz expressed_in='__model__'>0 1 0</xyz>
+                    <limit>
+                        <lower>-inf</lower>
+                        <upper>inf</upper>
+                    </limit>
+                </axis>              
+            </joint>
+
+            <joint name='right_wheel_joint' type='revolute'>
+                <pose relative_to='right_wheel'/>
+                <parent>right_fork</parent>
+                <child>right_wheel</child>               
+                <axis>
+                    <xyz expressed_in='__model__'>0 1 0</xyz>
+                    <limit>
+                        <lower>-inf</lower>
+                        <upper>inf</upper>
+                    </limit>
+                </axis> 
+            </joint>
+
+            <joint name='left_back_fork_joint' type='fixed'>
+                <pose relative_to='left_back_fork'/>
+                <parent>chassis</parent>
+                <child>left_back_fork</child>
+                <axis>
+                    <xyz expressed_in='__model__'>0 1 0</xyz> 
+                    <limit>
+                        <lower>-inf</lower>    <!--negative infinity-->
+                        <upper>inf</upper>     <!--positive infinity-->
+                    </limit>
+                </axis>
+            </joint>
+
+            <joint name='right_back_fork_joint' type='fixed'>
+                <pose relative_to='right_back_fork'/>
+                <parent>chassis</parent>
+                <child>right_back_fork</child>
+                <axis>
+                    <xyz expressed_in='__model__'>0 1 0</xyz>
+                    <limit>
+                        <lower>-inf</lower>    <!--negative infinity-->
+                        <upper>inf</upper>     <!--positive infinity-->
+                    </limit>
+                </axis>
+            </joint>
+
+            <joint name='left_back_wheel_joint' type='revolute'> 
+                <pose relative_to='left_back_wheel'/>
+                <parent>left_back_fork</parent>
+                <child>left_back_wheel</child>
+                <axis>
+                    <xyz expressed_in='__model__'>0 1 0</xyz>
+                    <limit>
+                        <lower>-inf</lower>    <!--negative infinity-->
+                        <upper>inf</upper>     <!--positive infinity-->
+                    </limit>
+                </axis>               
+            </joint>
+
+            <joint name='right_back_wheel_joint' type='revolute'>
+                <pose relative_to='right_back_wheel'/>
+                <parent>right_back_fork</parent>
+                <child>right_back_wheel</child>
+                <axis>
+                    <xyz expressed_in='__model__'>0 1 0</xyz>
+                    <limit>
+                        <lower>-inf</lower>    <!--negative infinity-->
+                        <upper>inf</upper>     <!--positive infinity-->
+                    </limit>
+                </axis>          
+            </joint>  
+
+<!--diff drive plugin-->
+<!--
+            <plugin
+                filename="gz-sim-diff-drive-system"
+                name="gz::sim::systems::DiffDrive">
+                <left_joint>left_wheel_joint</left_joint>
+                <right_joint>right_wheel_joint</right_joint>
+                <wheel_separation>1.56</wheel_separation>
+                <wheel_radius>0.264</wheel_radius>
+                <odom_publish_frequency>1</odom_publish_frequency>
+                <topic>cmd_vel</topic>
+            </plugin>
+-->
+<!-- Skid Steer Drive System Plugin -->
+<!--
+            <plugin filename="gz-sim-skid-steer-drive-system" name="gz::sim::systems::SkidSteerDrive">
+                <left_front_wheel_joint>left_wheel_joint</left_front_wheel_joint>
+                <left_rear_wheel_joint>left_back_wheel_joint</left_rear_wheel_joint>
+                <right_front_wheel_joint>right_wheel_joint</right_front_wheel_joint>
+                <right_rear_wheel_joint>right_back_wheel_joint</right_rear_wheel_joint>
+
+                <wheel_separation>1.5</wheel_separation> 
+                <wheel_radius>0.26</wheel_radius>
+                <max_velocity>5.0</max_velocity>
+                <max_acceleration>2.0</max_acceleration>
+                <max_angular_velocity>1.0</max_angular_velocity>
+            </plugin>
+-->
+            <plugin name="SkidSteerDrivePlugin"
+                    filename="skid_steer_drive/libDdsSkidSteerDrivePlugin.so">
+                <dds_domain_id>0</dds_domain_id>
+                <topic_name_twist>cmd_vel</topic_name_twist>
+                <topic_name_odometry>odom</topic_name_odometry>
+                <topic_name_joint>joint</topic_name_joint>
+                <right_front_joint>right_front</right_front_joint>
+                <right_rear_joint>right_rear</right_rear_joint>
+                <left_front_joint>left_front</left_front_joint>
+                <left_rear_joint>left_rear</left_rear_joint>
+                <wheel_separation>0.4</wheel_separation>
+                <wheel_diameter>0.15</wheel_diameter>
+                <wheel_torque>5.0</wheel_torque>
+                <update_rate>2</update_rate>
+                <covariance_x>0.0001</covariance_x>
+                <covariance_y>0.0001</covariance_y>
+                <covariance_yaw>0.01</covariance_yaw>
+            </plugin>
+
+
+        </model>
+
+        <!-- Moving Left-->
+        <plugin filename="gz-sim-triggered-publisher-system"
+                name="gz::sim::systems::TriggeredPublisher">
+            <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+                <match field="data">16777234</match>
+            </input>
+            <output type="gz.msgs.Twist" topic="/cmd_vel">
+                linear: {x: 0.0}, angular: {z: 0.5}
+            </output>
+        </plugin>
+        <!-- Moving Forward-->
+        <plugin filename="gz-sim-triggered-publisher-system"
+                name="gz::sim::systems::TriggeredPublisher">
+            <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+                <match field="data">16777235</match>
+            </input>
+            <output type="gz.msgs.Twist" topic="/cmd_vel">
+                linear: {x: 0.5}, angular: {z: 0.0}
+            </output>
+        </plugin>
+        <!-- Moving Right-->
+        <plugin filename="gz-sim-triggered-publisher-system"
+                name="gz::sim::systems::TriggeredPublisher">
+            <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+                <match field="data">16777236</match>
+            </input>
+            <output type="gz.msgs.Twist" topic="/cmd_vel">
+                linear: {x: 0.0}, angular: {z: -0.5}
+            </output>
+        </plugin>
+        <!-- Moving Backward-->
+        <plugin filename="gz-sim-triggered-publisher-system"
+                name="gz::sim::systems::TriggeredPublisher">
+            <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+                <match field="data">16777237</match>
+            </input>
+            <output type="gz.msgs.Twist" topic="/cmd_vel">
+                linear: {x: -0.5}, angular: {z: 0.0}
+            </output>
+        </plugin>        
+
+    </world>
+</sdf>
