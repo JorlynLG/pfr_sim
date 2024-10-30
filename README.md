@@ -1,7 +1,8 @@
 # About The Project
 This package provides a simulation for the Precision Farming Rover. 
 
-![image](https://github.com/user-attachments/assets/0eb8b9d6-ee8e-4bc7-b435-e56494db9c2f)
+![image](https://github.com/user-attachments/assets/d7899369-1be4-4131-be92-5ce1d5d1cf89)
+
 
 ## Requirements
 
@@ -51,6 +52,7 @@ colcon build
 ```
 
 ## PFR RVIZ vizualizer
+![image](https://github.com/user-attachments/assets/0eb8b9d6-ee8e-4bc7-b435-e56494db9c2f)
 
 After building the package, launch the ```display.launch.py``` file from the ```pfr_urdf_ws``` package:
 
