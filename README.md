@@ -37,7 +37,7 @@ Clone this repository into your ``workspace/src`` folder. If you don't have a wo
 
 ```bash
 cd <path_to_your_workspace>/src
-git clone git@github.com:lucasmazz/differential_drive_robot.git
+git clone https://github.com/JorlynLG/pfr_sim.git
 cd ..
 ```
 
@@ -50,29 +50,28 @@ source /opt/ros/jazzy/setup.bash
 colcon build
 ```
 
-#### Launch the Robot
+#### Launch the RVIZ PFR vizualizer
 
-After building the package, launch the ```robot.launch.py``` file from the ```differential_drive_robot``` package:
+After building the package, launch the ```display.launch.py``` file from the ```pfr_urdf_ws``` package:
 
 ```bash
 source install/setup.bash
-ros2 launch differential_drive_robot robot.launch.py
+ros2 launch pfr_urdf_ws display.launch.py
 ```
 
-#### Control the Robot
+#### Launch the PFR in Gazebo with Joystick Control
 
 **Using a Joystick**
 
-In a new terminal, source the environment and launch the ```teleop-launch.py``` file from the ```teleop_twist_joy``` package. Adjust the joy_config parameter to match your joystick controller (e.g., xbox).
+In a new terminal, source the environment and launch the ```` file from the `````` package.
 
 ```bash
 source /opt/ros/jazzy/setup.bash
-ros2 launch teleop_twist_joy teleop-launch.py joy_config:='xbox'
+XXXXX
 ```
 
-**Using a Keyboard**
-
-If you don't have a joystick, you can control the robot using the ```teleop_twist_keyboard``` package. Run the following command:
+**Control the PFR**
+In a new terminal, source the environment and launch the ```teleop-launch.py``` file from the ```teleop_twist_joy``` package.
 
 ```bash
 source /opt/ros/jazzy/setup.bash
