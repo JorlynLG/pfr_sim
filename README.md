@@ -58,9 +58,9 @@ After building the package, launch the ```display.launch.py``` file from the ```
 source install/setup.bash
 ros2 launch pfr_urdf_ws display.launch.py
 ```
-![image](https://github.com/user-attachments/assets/d7899369-1be4-4131-be92-5ce1d5d1cf89)
 
 ## Launch the PFR in Gazebo with Control
+![image](https://github.com/user-attachments/assets/d7899369-1be4-4131-be92-5ce1d5d1cf89)
 
 **Launch the PFR in Gazebo**
 
