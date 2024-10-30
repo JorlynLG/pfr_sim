@@ -50,7 +50,7 @@ source /opt/ros/jazzy/setup.bash
 colcon build
 ```
 
-#### Launch the RVIZ PFR vizualizer
+## PFR RVIZ vizualizer
 
 After building the package, launch the ```display.launch.py``` file from the ```pfr_urdf_ws``` package:
 
@@ -59,9 +59,9 @@ source install/setup.bash
 ros2 launch pfr_urdf_ws display.launch.py
 ```
 
-#### Launch the PFR in Gazebo with Joystick Control
+## Launch the PFR in Gazebo with Control
 
-**Using a Joystick**
+**Launch the PFR in Gazebo**
 
 In a new terminal, source the environment and launch the ```` file from the `````` package.
 
@@ -70,7 +70,7 @@ source /opt/ros/jazzy/setup.bash
 XXXXX
 ```
 
-**Control the PFR**
+**Control the Robot**
 In a new terminal, source the environment and launch the ```teleop-launch.py``` file from the ```teleop_twist_joy``` package.
 
 ```bash
