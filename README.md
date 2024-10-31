@@ -72,7 +72,7 @@ In a new terminal, source the environment and launch the ```` file from the ````
 
 ```bash
 source /opt/ros/jazzy/setup.bash
-ros2 launch differntial_drive_robot display.launch.py
+ros2 launch differential_drive_robot display.launch.py
 ```
 
 **Control the Robot**
