@@ -1,0 +1,44 @@
+[0.009s] Invoking command in '/home/jlegarrec/Documents/pfr_sim/differential_drive_robot/build/differential_drive_robot': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/build/differential_drive_robot -- -j16 -l16
+[0.047s] Invoked command in '/home/jlegarrec/Documents/pfr_sim/differential_drive_robot/build/differential_drive_robot' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/build/differential_drive_robot -- -j16 -l16
+[0.070s] Invoking command in '/home/jlegarrec/Documents/pfr_sim/differential_drive_robot/build/differential_drive_robot': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/build/differential_drive_robot
+[0.076s] -- Install configuration: ""
+[0.076s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/launch
+[0.076s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/launch/robot.launch (Copy).py
+[0.076s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/launch/robot.launch.py
+[0.077s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/model
+[0.077s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/model/Test
+[0.077s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/model/Test/robot.xacro
+[0.077s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/model/pfr_urdf (Copy).urdf
+[0.077s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/model/meshes
+[0.077s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/model/meshes/acorn_frame.stl
+[0.077s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/model/meshes/fork_assembly.stl
+[0.077s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/model/meshes/wheel_assembly.stl
+[0.077s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/model/meshes/acorn_wheel.stl
+[0.077s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/model/meshes/acorn_fork.stl
+[0.078s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/model/meshes/acorn_frame2.stl
+[0.078s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/model/meshes/frame_assembly.stl
+[0.078s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/model/meshes/acorn_whee2.stl
+[0.078s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/model/robot (Copy).xacro
+[0.079s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/model/pfr_urdf.urdf
+[0.079s] -- Installing: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/model/robot.xacro
+[0.079s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/config
+[0.079s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/config/gz_bridge.yaml
+[0.079s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/worlds
+[0.079s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/worlds/sonoma_raceway.world
+[0.079s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/worlds/chats.world
+[0.079s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/ament_index/resource_index/package_run_dependencies/differential_drive_robot
+[0.079s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/ament_index/resource_index/parent_prefix_path/differential_drive_robot
+[0.080s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/environment/ament_prefix_path.sh
+[0.080s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/environment/ament_prefix_path.dsv
+[0.080s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/environment/path.sh
+[0.080s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/environment/path.dsv
+[0.080s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/local_setup.bash
+[0.080s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/local_setup.sh
+[0.080s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/local_setup.zsh
+[0.080s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/local_setup.dsv
+[0.080s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/package.dsv
+[0.080s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/ament_index/resource_index/packages/differential_drive_robot
+[0.080s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/cmake/differential_drive_robotConfig.cmake
+[0.081s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/cmake/differential_drive_robotConfig-version.cmake
+[0.081s] -- Up-to-date: /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/package.xml
+[0.081s] Invoked command in '/home/jlegarrec/Documents/pfr_sim/differential_drive_robot/build/differential_drive_robot' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/build/differential_drive_robot
