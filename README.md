@@ -25,7 +25,9 @@ sudo apt install -y                         \
     ros-jazzy-joint-state-publisher         \
     ros-jazzy-xacro                         \
     ros-jazzy-teleop-twist-keyboard         \
-    ros-jazzy-teleop-twist-joy 
+    ros-jazzy-teleop-twist-joy              \
+    ros-jazzy-joint-state-publisher-gui
+
 ```
 
 ## Usage
