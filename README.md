@@ -10,7 +10,7 @@ To run this package, you'll need the following:
 
 - [Linux Ubuntu 24.04](https://ubuntu.com/blog/tag/ubuntu-24-04-lts)
 - [ROS2 Jazzy Jalisco](https://docs.ros.org/en/rolling/Releases/Release-Jazzy-Jalisco.html)
-- [Gazebo Harmonic](https://gazebosim.org/docs/harmonic/getstarted/) 
+- [Gazebo Harmonic](https://gazebosim.org/docs/harmonic/getstarted/) [(easy to install it directly with ROS2 for the correct compatibility)](https://gazebosim.org/docs/latest/ros_installation/)
 
 
 #### Install Required ROS 2 Packages
