@@ -91,6 +91,7 @@ colcon build
 
 In a new terminal, source the environment and launch the ``robot_launch.py`` file from the ```differential_drive_robot``` package.
 ```bash
+source install/setup.bash
 ros2 launch differential_drive_robot robot.launch.py
 ```
 
