@@ -10,7 +10,6 @@
 /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/model/meshes/acorn_frame2.stl
 /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/model/meshes/frame_assembly.stl
 /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/model/meshes/acorn_whee2.stl
-/home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/model/robot (Copy).xacro
 /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/model/pfr_urdf.urdf
 /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/model/robot.xacro
 /home/jlegarrec/Documents/pfr_sim/differential_drive_robot/install/differential_drive_robot/share/differential_drive_robot/config/gz_bridge.yaml

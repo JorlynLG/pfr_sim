@@ -1,221 +1,300 @@
-<?xml version="1.0"?>
-
+<?xml version="1.0" ?>
 <robot name="simple_differential_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-    <!-- Robot Constants -->
-    <xacro:property name="PI" value="3.14159265"/>
-    <xacro:property name="body_length" value="0.5"/>
-    <xacro:property name="body_width" value="0.3"/>
-    <xacro:property name="body_height" value="0.1"/>
-    <xacro:property name="body_density" value="7850.0"/> <!-- Steel -->
-    <xacro:property name="body_mass" value="${body_density * body_length * body_height * body_width}"/>
-    <xacro:property name="body_inertia_x" value="${1.0/12.0 * body_mass * (body_height*body_height + body_width*body_width)}"/>
-    <xacro:property name="body_inertia_y" value="${1.0/12.0 * body_mass * (body_length*body_length + body_height*body_height)}"/>
-    <xacro:property name="body_inertia_z" value="${1.0/12.0 * body_mass * (body_length*body_length + body_width*body_width)}"/>
 
-    <xacro:property name="wheel_radius" value="0.1"/>
-    <xacro:property name="wheel_width" value="0.05"/>
-    <xacro:property name="wheel_separation" value="${body_width + wheel_width}"/>
-    <xacro:property name="wheel_offset" value="${body_length/2 - wheel_radius}"/>
-    <xacro:property name="wheel_density" value="900"/> <!-- Ruber -->
-    <xacro:property name="wheel_mass" value="${wheel_density * PI * wheel_radius * wheel_radius * wheel_width}"/>
-    <xacro:property name="wheel_inertia_x" value="${1.0/12.0 * wheel_mass * (3*wheel_radius*wheel_radius + wheel_width*wheel_width)}"/>
-    <xacro:property name="wheel_inertia_y" value="${1.0/12.0 * wheel_mass * (3*wheel_radius*wheel_radius + wheel_width*wheel_width)}"/>
-    <xacro:property name="wheel_inertia_z" value="${1.0/2.0 * wheel_mass * wheel_radius * wheel_radius}"/>
 
-    <xacro:property name="caster_radius" value="0.1"/>
-    <xacro:property name="caster_offset" value="${body_length/2 - caster_radius}"/>
-    <xacro:property name="caster_density" value="0.1"/> <!-- Ruber -->
-    <xacro:property name="caster_mass" value="${caster_density * 4.0/3.0 * PI * caster_radius * caster_radius * caster_radius}"/>
-    <xacro:property name="caster_inertia_x" value="${2.0/5.0 * caster_mass * caster_radius * caster_radius}"/>
-    <xacro:property name="caster_inertia_y" value="${2.0/5.0 * caster_mass * caster_radius * caster_radius}"/>
-    <xacro:property name="caster_inertia_z" value="${2.0/5.0 * caster_mass * caster_radius * caster_radius}"/>
+    <material name="ChassisMaterial">
+        <color rgba="0.6 0.6 0.6 1"/>
+    </material>
 
-    <!-- Links -->
+    <material name="ForkMaterial">
+        <color rgba="0.0 0.5 0.0 1"/> <!-- Medium green -->
+    </material>
 
-    <!-- Body Link -->
-    <link name="body_link">
+    <material name="WheelMaterial">
+        <color rgba="0.2 0.2 0.2 1"/>
+    </material>
+
+<!-- Links -->
+  <link name="base_footprint"> </link>
+  <joint name="body_link_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0.5" rpy="0 0 0"/>
+  </joint>
+
+    <!-- Chassis -->
+    <link name="base_link">
+        <inertial>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <mass value="31.726"/>
+            <inertia ixx="14.69967178219" ixy="9.034e-14" ixz="1.250e-13" 
+                     iyy="18.23" iyz="3.749e-12" izz="31.10"/>
+        </inertial>
         <visual>
-            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <box size="${body_length} ${body_width} ${body_height}"/>
+                <mesh filename="package://model/meshes/frame_assembly.stl"/>
             </geometry>
-            <material name="body_material">
-                <color rgba="0.25 0.25 0.25 1.0"/>
-            </material>
+            <material name="ChassisMaterial"/>
         </visual>
         <collision>
-            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <box size="${body_length} ${body_width} ${body_height}"/>
+                <mesh filename="package://model/meshes/frame_assembly.stl"/>
             </geometry>
         </collision>
-        <inertial>
-            <mass value="10"/>
-            <inertia ixx="${body_inertia_x}" ixy="0.0" ixz="0.0" iyy="${body_inertia_y}" iyz="0" izz="${body_inertia_z}"/>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-        </inertial>
     </link>
 
-    <!-- Left Wheel -->
-    <link name="left_wheel_link">
+
+<!-- Forks -->
+
+    <link name="front_right_fork">
+        <inertial>
+            <mass value="20.664"/>
+            <inertia ixx="0.748741229" ixy="0.017262554" ixz="-0.011181714" 
+                     iyy="0.577270351" iyz="0.044985592" izz="0.577720988"/>
+        </inertial>
         <visual>
-            <origin xyz="0.0 0.0 0.0" rpy="1.570795 0.0 0.0"/>
             <geometry>
-                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+                <mesh filename="package://model/meshes/fork_assembly.stl"/>
             </geometry>
-            <material name="wheel_material">
-                <color rgba="0.0 0.0 0.0 1.0"/>
-            </material>
+            <material name="ForkMaterial"/>
         </visual>
         <collision>
-            <origin xyz="0.0 0.0 0.0" rpy="1.570795 0.0 0.0"/>
             <geometry>
-                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+                <mesh filename="package://model/meshes/fork_assembly.stl"/>
             </geometry>
         </collision>
-        <inertial>
-            <mass value="2"/>
-            <inertia ixx="${wheel_inertia_x}" ixy="0.0" ixz="0.0" iyy="${wheel_inertia_y}" iyz="0" izz="${wheel_inertia_z}"/>
-            <origin xyz="0.0 0.0 0.0" rpy="1.570795 0.0 0.0"/>
-        </inertial>
     </link>
 
-    <!-- Right Wheel -->
-    <link name="right_wheel_link">
+    <link name="front_left_fork">
+        <inertial>
+            <mass value="20.664"/>
+            <inertia ixx="0.748741229" ixy="0.017262554" ixz="-0.011181714" 
+                     iyy="0.577270351" iyz="0.044985592" izz="0.577720988"/>
+        </inertial>
         <visual>
-            <origin xyz="0.0 0.0 0.0" rpy="1.570795 0.0 0.0"/>
             <geometry>
-                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+                <mesh filename="package://model/meshes/fork_assembly.stl"/>
             </geometry>
-            <material name="wheel_material">
-                <color rgba="0.0 0.0 0.0 1.0"/>
-            </material>
+            <material name="ForkMaterial"/>
         </visual>
         <collision>
-            <origin xyz="0.0 0.0 0.0" rpy="1.570795 0.0 0.0"/>
             <geometry>
-                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+                <mesh filename="package://model/meshes/fork_assembly.stl"/>
             </geometry>
         </collision>
-        <inertial>
-            <mass value="2"/>
-            <inertia ixx="${wheel_inertia_x}" ixy="0.0" ixz="0.0" iyy="${wheel_inertia_y}" iyz="0" izz="${wheel_inertia_z}"/>
-            <origin xyz="0.0 0.0 0.0" rpy="1.570795 0.0 0.0"/>
-        </inertial>
     </link>
 
-    <!-- Left back Wheel -->
-    <link name="left_back_wheel_link">
+    <link name="rear_right_fork">
+        <inertial>
+            <mass value="20.664"/>
+            <inertia ixx="0.748741229" ixy="0.017262554" ixz="-0.011181714" 
+                     iyy="0.577270351" iyz="0.044985592" izz="0.577720988"/>
+        </inertial>
         <visual>
-            <origin xyz="0.0 0.0 0.0" rpy="1.570795 0.0 0.0"/>
             <geometry>
-                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+                <mesh filename="package://model/meshes/fork_assembly.stl"/>
             </geometry>
-            <material name="wheel_material">
-                <color rgba="0.0 0.0 0.0 1.0"/>
-            </material>
+            <material name="ForkMaterial"/>
         </visual>
         <collision>
-            <origin xyz="0.0 0.0 0.0" rpy="1.570795 0.0 0.0"/>
             <geometry>
-                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+                <mesh filename="package://model/meshes/fork_assembly.stl"/>
             </geometry>
         </collision>
-        <inertial>
-            <mass value="2"/>
-            <inertia ixx="${wheel_inertia_x}" ixy="0.0" ixz="0.0" iyy="${wheel_inertia_y}" iyz="0" izz="${wheel_inertia_z}"/>
-            <origin xyz="0.0 0.0 0.0" rpy="1.570795 0.0 0.0"/>
-        </inertial>
     </link>
 
-    <!-- Right Wheel -->
-    <link name="right_back_wheel_link">
+    <link name="rear_left_fork">
+        <inertial>
+            <mass value="20.664"/>
+            <inertia ixx="0.748741229" ixy="0.017262554" ixz="-0.011181714" 
+                     iyy="0.577270351" iyz="0.044985592" izz="0.577720988"/>
+        </inertial>
         <visual>
-            <origin xyz="0.0 0.0 0.0" rpy="1.570795 0.0 0.0"/>
             <geometry>
-                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+                <mesh filename="package://model/meshes/fork_assembly.stl"/>
             </geometry>
-            <material name="wheel_material">
-                <color rgba="0.0 0.0 0.0 1.0"/>
-            </material>
+            <material name="ForkMaterial"/>
         </visual>
         <collision>
-            <origin xyz="0.0 0.0 0.0" rpy="1.570795 0.0 0.0"/>
             <geometry>
-                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+                <mesh filename="package://model/meshes/fork_assembly.stl"/>
             </geometry>
         </collision>
-        <inertial>
-            <mass value="2"/>
-            <inertia ixx="${wheel_inertia_x}" ixy="0.0" ixz="0.0" iyy="${wheel_inertia_y}" iyz="0" izz="${wheel_inertia_z}"/>
-            <origin xyz="0.0 0.0 0.0" rpy="1.570795 0.0 0.0"/>
-        </inertial>
     </link>
 
-    <!-- Joints -->
+<!-- Wheels -->
 
-    <!-- Left Wheel Joint -->
-    <joint name="left_wheel_joint" type="continuous">
-        <origin xyz="-${wheel_offset} ${wheel_separation/2} -${wheel_radius/2}" rpy="0 0 0"/>
-        <parent link="body_link"/>
-        <child link="left_wheel_link"/>
-        <axis xyz="0 1 0"/>
-        <limit effort="100" velocity="10.0"/>
-        <dynamics damping="0.1" friction="0.1"/>
+    <link name="front_right_wheel">
+        <inertial>
+            <mass value="18.825"/>
+            <inertia ixx="0.51318866" ixy="-6.46e-7" ixz="-3.08e-7" 
+                     iyy="0.513187519" iyz="-8.3026e-5" izz="0.98574484"/>
+        </inertial>
+        <visual>
+            <geometry>
+                <mesh filename="package://model/meshes/wheel_assembly.stl"/>
+            </geometry>
+            <material name="WheelMaterial"/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://model/meshes/wheel_assembly.stl"/>
+            </geometry>
+        </collision>
+    </link>    
+
+    <link name="front_left_wheel">
+        <inertial>
+            <mass value="18.825"/>
+            <inertia ixx="0.51318866" ixy="-6.46e-7" ixz="-3.08e-7" 
+                     iyy="0.513187519" iyz="-8.3026e-5" izz="0.98574484"/>
+        </inertial>
+        <visual>
+            <geometry>
+                <mesh filename="package://model/meshes/wheel_assembly.stl"/>
+            </geometry>
+            <material name="WheelMaterial"/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://model/meshes/wheel_assembly.stl"/>
+            </geometry>
+        </collision>
+    </link>    
+
+    <link name="rear_right_wheel">
+        <inertial>
+            <mass value="18.825"/>
+            <inertia ixx="0.51318866" ixy="-6.46e-7" ixz="-3.08e-7" 
+                     iyy="0.513187519" iyz="-8.3026e-5" izz="0.98574484"/>
+        </inertial>
+        <visual>
+            <geometry>
+                <mesh filename="package://model/meshes/wheel_assembly.stl"/>
+            </geometry>
+            <material name="WheelMaterial"/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://model/meshes/wheel_assembly.stl"/>
+            </geometry>
+        </collision>
+    </link>    
+
+    <link name="rear_left_wheel">
+        <inertial>
+            <mass value="18.825"/>
+            <inertia ixx="0.51318866" ixy="-6.46e-7" ixz="-3.08e-7" 
+                     iyy="0.513187519" iyz="-8.3026e-5" izz="0.98574484"/>
+        </inertial>
+        <visual>
+            <geometry>
+                <mesh filename="package://model/meshes/wheel_assembly.stl"/>
+            </geometry>
+            <material name="WheelMaterial"/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://model/meshes/wheel_assembly.stl"/>
+            </geometry>
+        </collision>
+    </link>    
+
+<!-- Joints -->
+
+    <joint name="front_right_fork_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="front_right_fork"/>
+        <origin xyz="0.75 -0.78 -0.42" rpy="0 0 1.571"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14159" upper="3.14159" effort="10" velocity="1.0"/>
     </joint>
 
-    <!-- Right Wheel Joint -->
-    <joint name="right_wheel_joint" type="continuous">
-        <origin xyz="-${wheel_offset} ${-wheel_separation/2} -${wheel_radius/2}" rpy="0 0 0"/>
-        <parent link="body_link"/>
-        <child link="right_wheel_link"/>
-        <axis xyz="0 1 0"/>
-        <limit effort="100" velocity="10.0"/>
-        <dynamics damping="0.1" friction="0.1"/>
+    <joint name="front_left_fork_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="front_left_fork"/>
+        <origin xyz="0.75 0.78 -0.42" rpy="0 0 1.571"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14159" upper="3.14159" effort="10" velocity="1.0"/>
     </joint>
 
-    <joint name="left_back_wheel_joint" type="continuous">
-        <origin xyz="${wheel_offset} ${wheel_separation/2} -${wheel_radius/2}" rpy="0 0 0"/>
-        <parent link="body_link"/>
-        <child link="left_back_wheel_link"/>
+    <joint name="rear_right_fork_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="rear_right_fork"/>
+        <origin xyz="-0.75 -0.78 -0.42" rpy="0 0 1.571"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14159" upper="3.14159" effort="10" velocity="1.0"/>
     </joint>
 
-    <joint name="right_back_wheel_joint" type="continuous">
-        <origin xyz="${wheel_offset} ${-wheel_separation/2} -${wheel_radius/2}" rpy="0 0 0"/>
-        <parent link="body_link"/>
-        <child link="right_back_wheel_link"/>
-    </joint>    
+    <joint name="rear_left_fork_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="rear_left_fork"/>
+        <origin xyz="-0.75 0.78 -0.42" rpy="0 0 1.571"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14159" upper="3.14159" effort="10" velocity="1.0"/>
+    </joint>
+
+    <joint name="front_right_wheel_joint" type="revolute">
+        <parent link="front_right_fork"/>
+        <child link="front_right_wheel"/>
+        <origin xyz="0 0 -0.31" rpy="0 1.571 0"/> 
+        <axis xyz="0 0 1"/>
+        <limit lower="-1e10" upper="1e10" effort="150" velocity="30.0"/>
+    </joint>
+
+    <joint name="front_left_wheel_joint" type="revolute">
+        <parent link="front_left_fork"/>
+        <child link="front_left_wheel"/>
+        <origin xyz="0 0 -0.31" rpy="0 1.571 0"/> 
+        <axis xyz="0 0 1"/>
+        <limit lower="-1e10" upper="1e10" effort="150" velocity="30.0"/>
+    </joint>
+
+    <joint name="rear_right_wheel_joint" type="revolute">
+        <parent link="rear_right_fork"/>
+        <child link="rear_right_wheel"/>
+        <origin xyz="0 0 -0.31" rpy="0 1.571 0"/> 
+        <axis xyz="0 0 1"/>
+        <limit lower="-1e10" upper="1e10" effort="150" velocity="30.0"/>
+    </joint>
+
+    <joint name="rear_left_wheel_joint" type="revolute">
+        <parent link="rear_left_fork"/>
+        <child link="rear_left_wheel"/>
+        <origin xyz="0 0 -0.31" rpy="0 1.571 0"/> 
+        <axis xyz="0 0 1"/>
+        <limit lower="-1e10" upper="1e10" effort="150" velocity="30.0"/>
+    </joint>
 
     <!-- Gazebo Parameters -->
-    <gazebo reference="body_link">
+    <gazebo reference="front_right_wheel">
         <mu1>1.0</mu1>
         <mu2>1.0</mu2>
     </gazebo>
 
-    <gazebo reference="right_wheel_link">
+    <gazebo reference="front_left_wheel">
         <mu1>1.0</mu1>
         <mu2>1.0</mu2>
     </gazebo>
 
-    <gazebo reference="left_wheel_link">
-        <mu1>1.0</mu1>
-        <mu2>1.0</mu2>
-    </gazebo>
-
-    <gazebo reference="right_back_wheel_link">
+    <gazebo reference="rear_right_wheel">
         <mu1>0.000001</mu1>
         <mu2>0.000001</mu2>
     </gazebo>
 
-    <gazebo reference="left_back_wheel_link">
+    <gazebo reference="rear_left_wheel">
         <mu1>0.000001</mu1>
         <mu2>0.000001</mu2>
     </gazebo>
+
+
 
     <!-- Gazebo Plugins -->
     <gazebo>
-        
+<!--        
         <plugin filename="gz-sim-four-wheel-drive" name="gz::sim::systems::FourWheelDrive">
             <front_left_joint>left_wheel_joint</front_left_joint>
             <front_right_joint>ight_wheel_joint</front_right_joint>
@@ -227,24 +306,22 @@
             <odom_topic>odom</odom_topic>
         </plugin>
 
-<!--
+-->
         <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
-            <right_joint>right_wheel_joint</right_joint>
-            <left_joint>left_wheel_joint</left_joint>
-            <wheel_separation>${wheel_separation}</wheel_separation>
-            <wheel_radius>${wheel_radius}</wheel_radius>
+            <right_joint>front_right_wheel_joint</right_joint>
+            <left_joint>front_left_wheel_joint</left_joint>
+            <wheel_separation>0.4</wheel_separation>
+            <wheel_radius>0.15</wheel_radius>
             <max_linear_acceleration>10</max_linear_acceleration>
             <odom_publish_frequency>10</odom_publish_frequency>
             <topic>cmd_vel</topic>
             <odom_topic>odom</odom_topic>
         </plugin>
--->
+
         <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
             <topic>joint_states</topic>
-            <joint_name>right_wheel_joint</joint_name>
-            <joint_name>left_wheel_joint</joint_name>
-            <joint_name>right_back_wheel_joint</joint_name>
-            <joint_name>left_back_wheel_joint</joint_name>
+            <joint_name>front_right_wheel_joint</joint_name>
+            <joint_name>front_left_wheel_joint</joint_name>
         </plugin>
     </gazebo>
 
