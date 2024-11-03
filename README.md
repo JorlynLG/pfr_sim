@@ -53,6 +53,7 @@ Clone this repository into to where ever you would like on your computer.
 ```bash
 git clone https://github.com/JorlynLG/pfr_sim.git
 ```
+Before running each package make sure to return to the main pfr_sim directory
 
 ## PFR RVIZ vizualizer
 ![image](https://github.com/user-attachments/assets/0eb8b9d6-ee8e-4bc7-b435-e56494db9c2f)
@@ -60,6 +61,11 @@ git clone https://github.com/JorlynLG/pfr_sim.git
 #### Build the package
 This repository already has the ROS2 workspaces set up, but if you would like to learn more about how to create on, look at this [ROS2 workspace tutorial](https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html).
 
+Ensure you are in the correct directory.
+```bash
+cd prf_urdf_ws
+```
+Build the package
 ```bash
 colcon build
 ```
@@ -74,9 +80,16 @@ ros2 launch pfr_urdf_ws display.launch.py
 ![image](https://github.com/user-attachments/assets/d7899369-1be4-4131-be92-5ce1d5d1cf89)
 
 **Launch the PFR in Gazebo**
+Ensure you are in the correct directory.
+```bash
+cd differential_drive_robot
+```
+Build the package
+```bash
+colcon build
+```
 
 In a new terminal, source the environment and launch the ``robot_launch.py`` file from the ```differential_drive_robot``` package.
-
 ```bash
 ros2 launch differential_drive_robot robot.launch.py
 ```
