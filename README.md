@@ -52,7 +52,6 @@ Clone this repository into to where ever you would like on your computer.
 
 ```bash
 git clone https://github.com/JorlynLG/pfr_sim.git
-cd ..
 ```
 
 ## PFR RVIZ vizualizer
