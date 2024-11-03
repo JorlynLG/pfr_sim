@@ -30,6 +30,15 @@ sudo apt install -y                         \
 
 ```
 
+Recommended to source ROS2 directly in your bashrc file. This will ensure all ROS2 files are property setup each time you open a new terminal. 
+```bash
+echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
+```
+If you do not do this, you will need to source ROS2 each time you open a new terminal window. 
+```bash
+source /opt/ros/jazzy/setup.bash
+```
+
 ## Usage
 
 
@@ -39,7 +48,6 @@ Clone this repository into your ``workspace/src`` folder. If you don't have a wo
 
 
 ```bash
-cd <path_to_your_workspace>/src
 git clone https://github.com/JorlynLG/pfr_sim.git
 cd ..
 ```
