@@ -77,29 +77,31 @@ source install/setup.bash
 ros2 launch pfr_urdf_ws display.launch.py
 ```
 
-## Launch the PFR in Gazebo with Control
+## Launch the PFR in Gazebo with 4 Wheel Steering Control
 ![image](https://github.com/user-attachments/assets/d7899369-1be4-4131-be92-5ce1d5d1cf89)
 
 **Launch the PFR in Gazebo**
 
 Ensure you are in the correct directory.
 ```bash
-cd differential_drive_robot
+cd pfr_gz_control_ws
 ```
 Build the package
 ```bash
 colcon build
 ```
 
-In a new terminal, source the environment and launch the ``robot_launch.py`` file from the ```differential_drive_robot``` package.
+In a new terminal, source the environment and launch the ``robot_spawn.launch.py`` file from the ```robot_sim``` package.
 ```bash
 source install/setup.bash
-ros2 launch differential_drive_robot robot.launch.py
+ros2 launch robot_sim robot_spawn.launch.py
 ```
 
 **Control the Robot**
 In a new terminal, source the environment and launch the ```teleop-launch.py``` file from the ```teleop_twist_joy``` package.
 
 ```bash
-ros2 run teleop_twist_keyboard teleop_twist_keyboard
+source install/setup.bash
+ros2 launch velocity_pub four_ws_control.launch.py
 ```
+This will launch a GUI Joystick that you can use to control the robot, howeever you can also update the code to work with a physical joystick.
