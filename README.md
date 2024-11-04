@@ -28,7 +28,9 @@ sudo apt install -y                         \
     ros-jazzy-xacro                         \
     ros-jazzy-teleop-twist-keyboard         \
     ros-jazzy-teleop-twist-joy              \
-    ros-jazzy-joint-state-publisher-gui
+    ros-jazzy-joint-state-publisher-gui     \
+    ros-jazzy-ros2-control                  \
+    ros-jazzy-joy*
 
 ```
 #### Source ROS2 to bashrc file
