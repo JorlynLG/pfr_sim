@@ -77,10 +77,10 @@ source install/setup.bash
 ros2 launch pfr_urdf_ws display.launch.py
 ```
 
-## Launch the PFR in Gazebo with 4 Wheel Steering Control
+## Launch PFR in Gazebo with 4 Wheel Steering Control
 ![image](https://github.com/user-attachments/assets/d7899369-1be4-4131-be92-5ce1d5d1cf89)
 
-**Launch the PFR in Gazebo**
+**Launch PFR in Gazebo**
 
 Ensure you are in the correct directory.
 ```bash
@@ -97,8 +97,8 @@ source install/setup.bash
 ros2 launch robot_sim robot_spawn.launch.py
 ```
 
-**Control the Robot**
-In a new terminal, source the environment and launch the ```teleop-launch.py``` file from the ```teleop_twist_joy``` package.
+**4-Wheel Control for PRF**
+In a new terminal, source the environment and launch the ```four_ws_control.launch.py``` file from the ```velocity_pub``` package.
 
 ```bash
 source install/setup.bash
